@@ -11,7 +11,7 @@ const stringifySchema = (schema) => {
         : "<no schema>";
 };
 const testSchema = (schemaVer, testValid = true) => {
-    describe("test schema " + JSON.stringify(schemaVer), () => {
+    describe("test schema " + stringifySchema(schemaVer), () => {
         const valid = ajv.compile(dataDefStandartAjv.schemaVersion);
         const result = valid(schemaVer);
         if (testValid) {
@@ -37,7 +37,7 @@ const testSchema = (schemaVer, testValid = true) => {
                 });
             }
         } else {
-            it("test schema is invalid", () => {
+            it("test schema " + stringifySchema(schemaVer) + " is invalid", () => {
                 const finalResult = [result];
                 if (result) {
                     schemaVer.validValues.forEach(v => {
@@ -58,8 +58,13 @@ const testSchema = (schemaVer, testValid = true) => {
 };
 module.exports.testSchema = testSchema;
 
+const stringifyValue = (valueVer) => {
+    return !!valueVer.value
+        ? JSON.stringify(valueVer.value)
+        : "";
+};
 const testValue = (valueVer, testValid = true) => {
-    describe("test value " + JSON.stringify(!!valueVer.value ? valueVer.value : ""), () => {
+    describe("test value " + stringifyValue(valueVer), () => {
         const valid = ajv.compile(dataDefStandartAjv.valueVersion);
         const result = valid(valueVer);
         if (testValid) {
@@ -68,7 +73,7 @@ const testValue = (valueVer, testValid = true) => {
                 assert.ok(result);
             });
             if (result) {
-                it("test valid value", () => {
+                it("test is valid value", () => {
                     const valid = ajv.compile(valueVer.schema);
                     const result = valid(valueVer.value);
                     if (!result) console.log("invalid reason: ", valid.errors);
@@ -76,7 +81,7 @@ const testValue = (valueVer, testValid = true) => {
                 });
             }
         } else {
-            it("test schema is invalid", () => {
+            it("test value is invalid", () => {
                 const finalResult = [result];
                 if (result) {
                     const valid = ajv.compile(valueVer.schema);
