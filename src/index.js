@@ -6,9 +6,12 @@ const ajv = new Ajv();
 module.exports = {};
 
 const stringifySchema = (schema) => {
-    return !!schema.schema
+    const result = !!schema.schema
         ? JSON.stringify(schema.schema)
         : "<no schema>";
+    return (result.length > 50)
+        ? result.substring(0, 50) + "..."
+        : result;
 };
 const testSchema = (schemaVer, testValid = true) => {
     describe("test schema " + stringifySchema(schemaVer), () => {
@@ -59,9 +62,12 @@ const testSchema = (schemaVer, testValid = true) => {
 module.exports.testSchema = testSchema;
 
 const stringifyValue = (valueVer) => {
-    return !!valueVer.value
+    const result = !!valueVer.value
         ? JSON.stringify(valueVer.value)
         : "";
+    return (result.length > 50)
+        ? result.substring(0, 50) + "..."
+        : result;
 };
 const testValue = (valueVer, testValid = true) => {
     describe("test value " + stringifyValue(valueVer), () => {
