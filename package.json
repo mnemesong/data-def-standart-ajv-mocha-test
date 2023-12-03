@@ -1,0 +1,25 @@
+{
+  "name": "data-def-standart-ajv-mocha-test",
+  "version": "1.0.0",
+  "description": "Mocha tests for data-def-standart-ajv schemas and values",
+  "main": "./src/index.js",
+  "scripts": {
+    "test:unit": "mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnemesong/data-def-standart-ajv-mocha-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnemesong/data-def-standart-ajv-mocha-test/issues"
+  },
+  "homepage": "https://github.com/mnemesong/data-def-standart-ajv-mocha-test#readme",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "data-def-standart-ajv": "^1.0.0",
+    "mocha": "^10.2.0"
+  }
+}
